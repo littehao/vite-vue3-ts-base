@@ -17,43 +17,36 @@
       />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-        >Submit</el-button
-      >
+      <el-button type="primary" @click="submitForm">Submit</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, toRefs } from 'vue'
-import type { FormInstance } from 'element-plus'
+import { reactive } from 'vue'
 import LoginApi from '@/api/loginApi'
-
-const ruleFormRef = ref<FormInstance>()
 
 const ruleForm = reactive({
   mobile: '18888888883',
   password: '111111'
 })
 
-const submitForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.validate((valid) => {
-    if (valid) {
-      let data = {
-        ...ruleForm
-      }
-      LoginApi.login(data).then((res) => {
-        console.log(res)
-        ElMessage({
-          message: '登录成功',
-          type: 'success'
-        })
-      })
-    } else {
-      console.log('error submit!')
-      return false
-    }
+const submitForm = () => {
+  let data = {
+    ...ruleForm
+  }
+  LoginApi.login(data).then((res) => {
+    console.log(res)
+    ElMessage({
+      message: '登录成功',
+      type: 'success'
+    })
+  }).catch(err => {
+    console.log(err)
+    ElMessage({
+      message: '请求失败',
+      type: 'error'
+    })
   })
 }
 </script>

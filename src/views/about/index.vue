@@ -1,15 +1,10 @@
 <template>
-  <div></div>
+  <div>
+    关于我们
+  </div>
 </template>
-<script>
-export default {
-  data () {
-    return {
-    }
-  }
-
-}
-
+<script setup lang="ts">
+  console.log('关于我们')
 </script>
 <style lang='scss' scoped>
 

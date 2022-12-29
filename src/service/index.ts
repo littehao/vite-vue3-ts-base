@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 import { BASE_URL, TIME_OUT } from './config'
-  
+
 const service = axios.create({
   baseURL: BASE_URL,
   timeout: TIME_OUT,  // 超时时间
@@ -46,12 +46,12 @@ service.interceptors.request.use(
     removePending(config);
     config.cancelToken = new CancelToken((c:any) => {
       pending.push(
-        { 
-          url: config.url, 
-          method: config.method, 
-          params: config.params, 
-          data: config.data, 
-          cancel: c 
+        {
+          url: config.url,
+          method: config.method,
+          params: config.params,
+          data: config.data,
+          cancel: c
         }
       );
     });
